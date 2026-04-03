@@ -42,7 +42,7 @@ function Search() {
     result.sort((a, b) => a.timeValue - b.timeValue);
 
     return result;
-  }, [searchTerm, category, timeLimit, difficulty]);
+  }, [searchTerm, category, timeLimit, difficulty, allRecipes]); // ✅ added allRecipes
 
   return (
     <div>
