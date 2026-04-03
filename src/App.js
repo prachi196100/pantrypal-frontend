@@ -1,36 +1,34 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './context/AuthContext';
-import Navbar from './components/Navbar/Navbar';
-import Login from './components/Auth/Login';
-import Register from './components/Auth/Register';
-import Home from './components/Home/Home';
-import './App.css';
-
-const PrivateRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-  if (loading) return <div>Loading...</div>;
-  return user ? children : <Navigate to="/login" />;
-};
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Search from './pages/Search';
+import AddRecipe from './pages/AddRecipe';
+import Favorites from './pages/Favorites';
+import About from './pages/About';
+import Login from './pages/Login';
+import CategoryPage from './pages/CategoryPage';
+import RecipeDetail from './pages/RecipeDetail';
+import './styles.css';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <div className="App">
-          <Navbar />
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/" element={
-              <PrivateRoute>
-                <Home />
-              </PrivateRoute>
-            } />
-          </Routes>
-        </div>
-      </Router>
-    </AuthProvider>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/add" element={<AddRecipe />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/category/:categoryName" element={<CategoryPage />} />
+          <Route path="/recipe/:id" element={<RecipeDetail />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

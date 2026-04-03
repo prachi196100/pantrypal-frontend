@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-// YOUR BACKEND URL - Replace with your actual backend URL
-const API_URL = 'https://pantrypal-backend.vercel.app';
+// Backend base URL (no trailing /api)
+const API_URL =
+  process.env.REACT_APP_API_URL ||
+  'http://localhost:5000';
 
 const api = axios.create({
   baseURL: API_URL,
